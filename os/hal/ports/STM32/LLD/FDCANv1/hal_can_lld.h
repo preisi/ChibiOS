@@ -334,6 +334,10 @@ typedef struct hal_can_config {
    * @brief   Global filter configuration register.
    */
   uint32_t                  RXGFC;
+  /**
+   * @brief   Clock divider register.
+   */
+  uint32_t                  CKDIV;
 } CANConfig;
 
 /**

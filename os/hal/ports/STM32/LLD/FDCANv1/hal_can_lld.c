@@ -287,6 +287,13 @@ bool can_lld_start(CANDriver *canp) {
 	  canp->fdcan->TEST = canp->config->TEST;
   }
   canp->fdcan->RXGFC  = canp->config->RXGFC;
+#if STM32_CAN_USE_FDCAN1
+  /* TODO: CKDIV is only present on FDCAN1 but its configuration affects all
+   * available FDCAN instances */
+  if (&CAND1 == canp) {
+	  canp->fdcan->CKDIV = canp->config->CKDIV;
+  }
+#endif
 
   /* Start clock and disable configuration mode.*/
   canp->fdcan->CCCR &= ~(FDCAN_CCCR_CSR | FDCAN_CCCR_INIT);

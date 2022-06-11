@@ -294,6 +294,8 @@ typedef struct
   __IO uint32_t TXBCIE;       /*!< FDCAN Tx Buffer Cancellation Finished Interrupt Enable register, Address offset: 0x0E0 */
   __IO uint32_t TXEFS;        /*!< FDCAN Tx Event FIFO Status register,                             Address offset: 0x0E4 */
   __IO uint32_t TXEFA;        /*!< FDCAN Tx Event FIFO Acknowledge register,                        Address offset: 0x0E8 */
+       uint32_t RESERVED7[5]; /*!< Reserved,                                                                0x0EC - 0x0FC */
+  __IO uint32_t CKDIV;        /*!< FDCAN Tx Event FIFO Acknowledge register,                        Address offset: 0x100 */
 } FDCAN_GlobalTypeDef;
 
 /**
