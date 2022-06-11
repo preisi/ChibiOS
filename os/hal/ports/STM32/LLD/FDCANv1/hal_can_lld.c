@@ -585,6 +585,36 @@ void can_lld_serve_interrupt(CANDriver *canp) {
   }
 }
 
+void can_lld_set_sfilter(CANDriver *canp,
+                         uint32_t id,
+                         const CANRxStandardFilter *filter) {
+
+    uint32_t *filter_address;
+    osalDbgCheck(id <= STM32_FDCAN_FLS_NBR);
+
+    /* Calculate filter address */
+    filter_address = (uint32_t *)(canp->ram_base + SRAMCAN_FLSSA + (id * SRAMCAN_FLS_SIZE));
+
+    /* Write filter element to the message RAM */
+    *filter_address = filter->data32;
+}
+
+void can_lld_set_efilter(CANDriver *canp,
+                         uint32_t id,
+                         const CANRxExtendedFilter *filter) {
+
+    uint32_t *filter_address;
+    osalDbgCheck(id <= STM32_FDCAN_FLE_NBR);
+
+    /* Calculate filter address */
+    filter_address = (uint32_t *)(canp->ram_base + SRAMCAN_FLESA + (id * SRAMCAN_FLE_SIZE));
+
+    /* Write filter element to the message RAM */
+    *filter_address = filter->data32[0];
+    filter_address++;
+    *filter_address = filter->data32[1];
+}
+
 #endif /* HAL_USE_CAN */
 
 /** @} */

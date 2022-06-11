@@ -246,6 +246,9 @@ extern "C" {
   void canSleep(CANDriver *canp);
   void canWakeup(CANDriver *canp);
 #endif
+
+  void canSetStandardFilter(CANDriver *canp, uint32_t id, CANRxStandardFilter *filter);
+  void canSetExtendedFilter(CANDriver *canp, uint32_t id, CANRxExtendedFilter *filter);
 #ifdef __cplusplus
 }
 #endif

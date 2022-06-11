@@ -477,6 +477,13 @@ extern "C" {
   void can_lld_wakeup(CANDriver *canp);
 #endif /* CAN_USE_SLEEP_MODE */
   void can_lld_serve_interrupt(CANDriver *canp);
+
+  void can_lld_set_sfilter(CANDriver *canp,
+                           uint32_t id,
+                           const CANRxStandardFilter *filter);
+  void can_lld_set_efilter(CANDriver *canp,
+                           uint32_t id,
+                           const CANRxExtendedFilter *filter);
 #ifdef __cplusplus
 }
 #endif

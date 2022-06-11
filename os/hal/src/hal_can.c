@@ -399,6 +399,30 @@ void canWakeup(CANDriver *canp) {
 }
 #endif /* CAN_USE_SLEEP_MODE == TRUE */
 
+void canSetStandardFilter(CANDriver *canp, uint32_t id, CANRxStandardFilter *filter) {
+
+  osalDbgCheck((canp != NULL) && (filter != NULL));
+
+  osalSysLock();
+  osalDbgAssert((canp->state == CAN_READY) || (canp->state == CAN_SLEEP),
+                "invalid state");
+
+  can_lld_set_sfilter(canp, id, filter);
+  osalSysUnlock();
+}
+
+void canSetExtendedFilter(CANDriver *canp, uint32_t id, CANRxExtendedFilter *filter) {
+
+  osalDbgCheck((canp != NULL) && (filter != NULL));
+
+  osalSysLock();
+  osalDbgAssert((canp->state == CAN_READY) || (canp->state == CAN_SLEEP),
+                "invalid state");
+
+  can_lld_set_efilter(canp, id, filter);
+  osalSysUnlock();
+}
+
 #endif /* HAL_USE_CAN == TRUE */
 
 /** @} */
